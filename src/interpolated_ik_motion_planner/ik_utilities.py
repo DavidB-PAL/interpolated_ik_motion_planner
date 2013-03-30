@@ -132,7 +132,7 @@ class IKUtilities:
         # Timeout if the IK Service failed to load, otherwise this will silently hang
         rospy.loginfo("Interpolated IK node: waiting for service  %sget_ik", self.srvroot )
         try:
-            rospy.wait_for_service(self.srvroot+'get_ik', 60.0)
+            rospy.wait_for_service(self.srvroot+'get_ik', 120.0)
         except rospy.ROSException:
             print "Interpolated IK node: service not found  "+self.srvroot +"get_ik"
             rospy.signal_shutdown('Quit')
