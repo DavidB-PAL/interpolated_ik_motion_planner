@@ -129,8 +129,14 @@ class IKUtilities:
     #wait for the various services and run the IK query to get the joint names and limits
     def check_services_and_get_ik_info(self):
 
-        rospy.loginfo("ik_utilities: waiting for IK services to be there")
-        rospy.wait_for_service(self.srvroot+'get_ik')
+        # Timeout if the IK Service failed to load, otherwise this will silently hang
+        rospy.loginfo("Interpolated IK node: waiting for service  %sget_ik", self.srvroot )
+        try:
+            rospy.wait_for_service(self.srvroot+'get_ik', 60.0)
+        except rospy.ROSException:
+            print "Interpolated IK node: service not found  "+self.srvroot +"get_ik"
+            rospy.signal_shutdown('Quit')
+
         if self.perception_running:
             rospy.wait_for_service(self.srvroot+'get_constraint_aware_ik')
         rospy.wait_for_service(self.srvroot+'get_fk')
