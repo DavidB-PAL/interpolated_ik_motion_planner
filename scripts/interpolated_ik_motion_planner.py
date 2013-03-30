@@ -140,7 +140,7 @@ class InterpolatedIKService:
         self.max_joint_vels = rospy.get_param(self.node_name+'/max_joint_vels', [.1]*7)
 
         #max joint accelerations to use when calculating times and vels for the trajectory
-        self.max_joint_accs = rospy.get_param(self.node_name+'/max_joint_vels', [.25]*7)
+        self.max_joint_accs = rospy.get_param(self.node_name+'/max_joint_accs', [.25]*7)
 
         #initialize an IKUtilities class object
         if which_arm == 'r':
