@@ -353,6 +353,8 @@ if __name__ == "__main__":
     which_arm = None
     if len(sys.argv) >= 2:
         which_arm = sys.argv[1]
+    #if len(rospy.myargv()) >= 2:
+    #      which_arm = rospy.myargv()[1]
     interpolated_ik_service = InterpolatedIKService(which_arm)
     rospy.loginfo("Ready to serve interpolated IK motion plan requests.")
 
